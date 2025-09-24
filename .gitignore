@@ -3,3 +3,4 @@
 imageReasoning/
 __pycache__/
 *.pyc
+.vscode/
