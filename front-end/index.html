@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Visual Reasoning</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="icon" href="/static/logos/jotform-icon-orange-400x400.png" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <img src="/static/logos/jotform-icon-orange-400x400.png" alt="Logo" class="logo" />
+        <div class="brand-text">
+          <h1>Visual Reasoning</h1>
+          <p>Ask questions with images. Get visual answers.</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="panel input-panel">
+        <h2>Input</h2> 
+        <form id="qaForm">
+          <div class="input-controls">
+            <label class="heading-label" for="image">Image</label>
+            <div class="file-row">
+              <input id="image" name="image" type="file" accept="image/*" class="visually-hidden" />
+              <label for="image" class="btn btn-secondary" id="chooseFileBtn">Choose file</label>
+              <span id="fileName" class="file-name">No file chosen</span>
+              <button type="button" id="clearImage" class="btn btn-ghost">Clear</button>
+            </div>
+            <button type="submit" class="btn btn-primary btn-run" id="submitBtn">
+              <img src="/static/logos/podo_2.png" alt="" class="btn-icon" />
+              <span>Run</span>
+            </button>
+          </div>
+
+          <label class="heading-label" for="question">Question</label>
+          <textarea id="question" name="question" rows="4" placeholder="Describe what to find, read, or highlight..."></textarea>
+
+          <div id="imagePreview" class="image-preview hidden"></div>
+        </form>
+      </section>
+
+      <section class="panel output-panel">
+        <div class="output-header">
+          <h2>Output</h2>
+          <div id="progressTop" class="progress hidden" aria-live="polite">
+            <img src="/static/logos/podo_2.png" alt="Reasoning" class="typing-logo" />
+            <span class="typing-text">Reasoning...</span>
+          </div>
+        </div>
+        <div id="finalAnswer" class="final-answer placeholder">Submit a question to see the answer here.</div>
+
+        <details id="transcriptPanel" class="collapsible hidden">
+          <summary>Execution Transcript</summary>
+          <div id="transcript" class="transcript"></div>
+          <div id="toolRuns" class="tool-runs"></div>
+        </details>
+
+        <details id="imagesPanel" class="collapsible hidden">
+          <summary>
+            <span class="badge" id="imagesCount">0</span>
+            <span>Image Outputs</span>
+          </summary>
+          <div id="imagesGrid" class="images-grid"></div>
+        </details>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div class="footer-content">
+        <img src="/static/logos/jotform-icon-transparent-280x280..png" alt="Jotform" class="footer-logo" />
+        <span>Powered by Jotform</span>
+      </div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+  </body>
+  </html>

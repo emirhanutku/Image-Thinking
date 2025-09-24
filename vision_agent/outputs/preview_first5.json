@@ -1,0 +1,167 @@
+[
+  {
+    "conversations": [
+      {
+        "from": "user",
+        "value": "Locate: green line at 2000. Return JSON {\"point_2d\":[x,y]} with x,y normalized to [0,1].",
+        "images": [
+          "/Users/emirhan/Desktop/Jotform Projects/Visual Reasoning/vision_agent/outputs/images/sample_1.png"
+        ]
+      },
+      {
+        "from": "assistant",
+        "value": "{\"point_2d\": [0.24, 0.677]}"
+      }
+    ],
+    "task": "Point",
+    "meta": {
+      "normalized_target": true,
+      "source_point": {
+        "x": 24.0,
+        "y": 67.7
+      },
+      "source_units": "percent",
+      "source_id": "10",
+      "image_path": "/Users/emirhan/Desktop/Jotform Projects/Visual Reasoning/vision_agent/outputs/images/sample_1.png",
+      "image_wh": [
+        420,
+        567
+      ],
+      "param": "green line at 2000",
+      "image_id": "img_1",
+      "sample_index": 10
+    }
+  },
+  {
+    "conversations": [
+      {
+        "from": "user",
+        "value": "Locate: 2013 x-axis for Mexico. Return JSON {\"point_2d\":[x,y]} with x,y normalized to [0,1].",
+        "images": [
+          "/Users/emirhan/Desktop/Jotform Projects/Visual Reasoning/vision_agent/outputs/images/sample_2.png"
+        ]
+      },
+      {
+        "from": "assistant",
+        "value": "{\"point_2d\": [0.929, 0.674]}"
+      }
+    ],
+    "task": "Point",
+    "meta": {
+      "normalized_target": true,
+      "source_point": {
+        "x": 92.9,
+        "y": 67.4
+      },
+      "source_units": "percent",
+      "source_id": "16",
+      "image_path": "/Users/emirhan/Desktop/Jotform Projects/Visual Reasoning/vision_agent/outputs/images/sample_2.png",
+      "image_wh": [
+        427,
+        520
+      ],
+      "param": "2013 x-axis for Mexico",
+      "image_id": "img_1",
+      "sample_index": 16
+    }
+  },
+  {
+    "conversations": [
+      {
+        "from": "user",
+        "value": "Locate: largest English percentage bar. Return JSON {\"point_2d\":[x,y]} with x,y normalized to [0,1].",
+        "images": [
+          "/Users/emirhan/Desktop/Jotform Projects/Visual Reasoning/vision_agent/outputs/images/sample_3.png"
+        ]
+      },
+      {
+        "from": "assistant",
+        "value": "{\"point_2d\": [0.355, 0.624]}"
+      }
+    ],
+    "task": "Point",
+    "meta": {
+      "normalized_target": true,
+      "source_point": {
+        "x": 35.5,
+        "y": 62.4
+      },
+      "source_units": "percent",
+      "source_id": "21",
+      "image_path": "/Users/emirhan/Desktop/Jotform Projects/Visual Reasoning/vision_agent/outputs/images/sample_3.png",
+      "image_wh": [
+        420,
+        297
+      ],
+      "param": "largest English percentage bar",
+      "image_id": "img_1",
+      "sample_index": 21
+    }
+  },
+  {
+    "conversations": [
+      {
+        "from": "user",
+        "value": "Locate: White mainline Approve bar. Return JSON {\"point_2d\":[x,y]} with x,y normalized to [0,1].",
+        "images": [
+          "/Users/emirhan/Desktop/Jotform Projects/Visual Reasoning/vision_agent/outputs/images/sample_4.png"
+        ]
+      },
+      {
+        "from": "assistant",
+        "value": "{\"point_2d\": [0.52, 0.577]}"
+      }
+    ],
+    "task": "Point",
+    "meta": {
+      "normalized_target": true,
+      "source_point": {
+        "x": 52.0,
+        "y": 57.7
+      },
+      "source_units": "percent",
+      "source_id": "32",
+      "image_path": "/Users/emirhan/Desktop/Jotform Projects/Visual Reasoning/vision_agent/outputs/images/sample_4.png",
+      "image_wh": [
+        310,
+        568
+      ],
+      "param": "White mainline Approve bar",
+      "image_id": "img_1",
+      "sample_index": 32
+    }
+  },
+  {
+    "conversations": [
+      {
+        "from": "user",
+        "value": "Locate: 2018 bar for 'Do more harm than good for the environment'. Return JSON {\"point_2d\":[x,y]} with x,y normalized to [0,1].",
+        "images": [
+          "/Users/emirhan/Desktop/Jotform Projects/Visual Reasoning/vision_agent/outputs/images/sample_5.png"
+        ]
+      },
+      {
+        "from": "assistant",
+        "value": "{\"point_2d\": [0.37, 0.821]}"
+      }
+    ],
+    "task": "Point",
+    "meta": {
+      "normalized_target": true,
+      "source_point": {
+        "x": 37.0,
+        "y": 82.1
+      },
+      "source_units": "percent",
+      "source_id": "123",
+      "image_path": "/Users/emirhan/Desktop/Jotform Projects/Visual Reasoning/vision_agent/outputs/images/sample_5.png",
+      "image_wh": [
+        420,
+        689
+      ],
+      "param": "2018 bar for 'Do more harm than good for the environment'",
+      "image_id": "img_2",
+      "sample_index": 123
+    }
+  }
+]
