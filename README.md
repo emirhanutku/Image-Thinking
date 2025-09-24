@@ -52,7 +52,7 @@ export PYTORCH_ENABLE_MPS_FALLBACK=1
 # Qwen2-VL LoRA for the Point tool (optional but expected by default code)
 # Point tool loads a PEFT adapter from this folder. Change this to your adapter.
 export QWEN_ADAPTER_DIR="/path/to/your/qwen2vl_lora_checkpoint"
-# Or to use base model only, edit vision_agent/tools/point_tool_qwen.py accordingly.
+# Or to use base model only, edit app/vision_agent/tools/point_tool_qwen.py accordingly.
 
 # Optional: change base model
 # export QWEN_BASE_ID="Qwen/Qwen2-VL-2B-Instruct"
@@ -60,9 +60,10 @@ export QWEN_ADAPTER_DIR="/path/to/your/qwen2vl_lora_checkpoint"
 
 5) Run the server
 ```bash
-python server.py
+# From repo root
+uvicorn app.server:app --reload
 # or
-uvicorn server:app --reload
+python app/server.py
 ```
 
 6) Open the web UI
@@ -92,24 +93,24 @@ curl -X POST http://localhost:8000/api/ask \
 The agent plans tool calls and executes them step-by-step until it can “Terminate” with an answer.
 
 - OCR
-  - File: `vision_agent/tools/ocr_tool.py`
+  - File: `app/vision_agent/tools/ocr_tool.py`
   - PaddleOCR extracts text (axes, labels, annotations).
 - Point
-  - File: `vision_agent/tools/point_tool.py`
+  - File: `app/vision_agent/tools/point_tool.py`
   - Uses Qwen2‑VL (vision-language model) + heuristics to locate a target point; can read numeric value on charts when possible.
-  - Qwen integration: `vision_agent/tools/point_tool_qwen.py` (PEFT LoRA expected via `QWEN_ADAPTER_DIR`).
+  - Qwen integration: `app/vision_agent/tools/point_tool_qwen.py` (PEFT LoRA expected via `QWEN_ADAPTER_DIR`).
 - ZoomInSubfigure
-  - File: `vision_agent/tools/zoom_in_subfigure_tool.py`
+  - File: `app/vision_agent/tools/zoom_in_subfigure_tool.py`
   - OCR anchors + LLM to crop a relevant subfigure/panel.
   - Default model name in code is “gpt-5-2025-08-07”; change to a model you have access to.
 - SegmentRegionAroundPoint
-  - File: `vision_agent/tools/segment_region_around_point_tool.py`
+  - File: `app/vision_agent/tools/segment_region_around_point_tool.py`
   - Segments around an (x,y) with SAM2 via Transformers (`facebook/sam2.1-hiera-large`).
 - DrawHorizontalLineByY / DrawVerticalLineByX
-  - Files: `vision_agent/tools/draw_horizontal_line.py`, `vision_agent/tools/draw_vertical_line.py`
+  - Files: `app/vision_agent/tools/draw_horizontal_line.py`, `app/vision_agent/tools/draw_vertical_line.py`
   - Draw dashed guide lines to visualize reasoning.
 
-All tool interfaces are declared in: `vision_agent/tools_spec.py`
+All tool interfaces are declared in: `app/vision_agent/tools_spec.py`
 
 ## How It Works
 
@@ -117,9 +118,9 @@ All tool interfaces are declared in: `vision_agent/tools_spec.py`
   - Serves static UI from `front-end/`
   - Endpoints: `/api/ask` and `/api/ask_stream`
   - Preloads few-shot exemplars from the dataset `hitsmy/OpenThinkIMG-Chart-SFT-2942` on startup
-- Agent: `vision_agent/executor.py`
-  - Builds the prompt (`vision_agent/prompt.py`)
-  - Calls OpenAI Chat Completions with tool specs (`vision_agent/tools_spec.py`)
+- Agent: `app/vision_agent/executor.py`
+  - Builds the prompt (`app/vision_agent/prompt.py`)
+  - Calls OpenAI Chat Completions with tool specs (`app/vision_agent/tools_spec.py`)
   - Executes Python implementations and feeds outputs back to the model
   - Emits new images via an in-memory `ImageStore` and exposes them to the front-end
 - Front-end: `front-end/` (vanilla HTML/CSS/JS)
@@ -129,19 +130,19 @@ All tool interfaces are declared in: `vision_agent/tools_spec.py`
 
 - `server.py:8000` — FastAPI app, web + API
 - `front-end/` — static assets for the UI
-- `vision_agent/executor.py` — tool-using agent loop
-- `vision_agent/prompt.py`, `tools_spec.py` — prompt and tool schemas
-- `vision_agent/runtime_tools.py` — tool adaptors + image store
-- `vision_agent/tools/*.py` — tool implementations
-- `vision_agent/dataset.py`, `config.py` — few-shot sampling config
+- `app/vision_agent/executor.py` — tool-using agent loop
+- `app/vision_agent/prompt.py`, `app/vision_agent/tools_spec.py` — prompt and tool schemas
+- `app/vision_agent/runtime_tools.py` — tool adaptors + image store
+- `app/vision_agent/tools/*.py` — tool implementations
+- `app/vision_agent/dataset.py`, `app/vision_agent/config.py` — few-shot sampling config
 - `GroundingDINO/`, `sam2_repo/` — git submodules (research/reference). Not required at runtime; segmentation uses Transformers SAM2.
 
 ## Configuration
 
-- LLM selection: `vision_agent/config.py` (`MODEL_NAME`, `TEMPERATURE`)
-- Zoom model: `vision_agent/tools/zoom_in_subfigure_tool.py` (`llm_model` argument)
-- SAM2 model ID: `vision_agent/tools/segment_region_around_point_tool.py` (default `facebook/sam2.1-hiera-large`)
-- Few-shot dataset: `vision_agent/config.py` (`DATASET`, `N_FEWSHOTS`, `MAX_EXAMPLES_SCAN`, `INDEXES_WE_WANT`)
+- LLM selection: `app/vision_agent/config.py` (`MODEL_NAME`, `TEMPERATURE`)
+- Zoom model: `app/vision_agent/tools/zoom_in_subfigure_tool.py` (`llm_model` argument)
+- SAM2 model ID: `app/vision_agent/tools/segment_region_around_point_tool.py` (default `facebook/sam2.1-hiera-large`)
+- Few-shot dataset: `app/vision_agent/config.py` (`DATASET`, `N_FEWSHOTS`, `MAX_EXAMPLES_SCAN`, `INDEXES_WE_WANT`)
 
 ## Troubleshooting
 
@@ -166,5 +167,3 @@ All tool interfaces are declared in: `vision_agent/tools_spec.py`
 - SAM2 (Transformers) for high-quality segmentation
 
 Enjoy Image Thinking!
-
-
